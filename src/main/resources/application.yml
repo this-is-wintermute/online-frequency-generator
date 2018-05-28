@@ -1,0 +1,5 @@
+micronaut:
+    application:
+        name: online-frequency-generator
+    server:
+        port: 8080
