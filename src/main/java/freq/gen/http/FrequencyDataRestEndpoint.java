@@ -1,17 +1,23 @@
 package freq.gen.http;
 
+import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller("/frequency")
 public class FrequencyDataRestEndpoint {
 
+    private static final Logger log = LoggerFactory.getLogger(FrequencyDataRestEndpoint.class);
     FrequencyGenerator freqGen = FrequencyGenerator.getTimeBasedInstance();
 
     /**
      * Returns a frequency reading in a broken JSON format.
      */
     @Get("/")
-    public String getReading() {
+    public String getReading(HttpHeaders headers) {
+        String userAgentString = headers.get(HttpHeaders.USER_AGENT);
+        log.info("Frequency reading requested by {} - {} Hz", userAgentString, freqGen.getLatestFrequency() );
         return String.format("{ \"frequencyReading\": { " +
                 "\"timestamp\": %d, " +
                 "\"frequency\": %.2f }, " +
@@ -20,6 +26,7 @@ public class FrequencyDataRestEndpoint {
 
     @Get("/validjson")
     public String getValidJsonReading() {
+        log.info("Valid JSON Frequency reading requested by {} - {} Hz", userAgentString, freqGen.getLatestFrequency() );
         return String.format("{ \"frequencyReading\": { " +
                 "\"timestamp\": %d, " +
                 "\"frequency\": %.2f }, " +
