@@ -25,8 +25,8 @@ public class FrequencyDataRestEndpoint {
     }
 
     @Get("/validjson")
-    public String getValidJsonReading() {
-        log.info("Valid JSON Frequency reading requested by {} - {} Hz", userAgentString, freqGen.getLatestFrequency() );
+    public String getValidJsonReading(HttpHeaders headers) {
+        log.info("Valid JSON Frequency reading requested by {} - {} Hz", headers.get(HttpHeaders.USER_AGENT), freqGen.getLatestFrequency() );
         return String.format("{ \"frequencyReading\": { " +
                 "\"timestamp\": %d, " +
                 "\"frequency\": %.2f }, " +
