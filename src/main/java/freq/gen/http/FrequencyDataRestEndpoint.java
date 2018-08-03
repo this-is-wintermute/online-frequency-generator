@@ -1,5 +1,6 @@
 package freq.gen.http;
 
+import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
@@ -30,12 +31,12 @@ public class FrequencyDataRestEndpoint
     }
 
 
-    @Get("/resetToDefault")
-    public HttpResponse<Object> reset()
-    {
-        FrequencyGenerator.getLatestFrequency();
-        return HttpResponse.ok();
-    }
+//    @Get("/resetToDefault")
+//    public HttpResponse<Object> reset()
+//    {
+//        FrequencyGenerator.getLatestFrequency();
+//        return HttpResponse.ok();
+//    }
 
 
     private Object getRandomValidity()
